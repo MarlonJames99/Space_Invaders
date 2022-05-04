@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Invaders</title>
+  <meta name="description" content="A remake of the classic Space Invaders game">
+  <meta name="author" content="Marlon James">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <header>Space Invaders</header>
+    <div class="game-wrapper">
+      <div class="game"></div>
+      <div class="congratulations">
+        <h1>Congratulations!</h1>
+        <h2>You won the game</h2>
+        <button class="btn" onclick="window.location.reload()">Restart</button>
+      </div>
+      <div class="game-over">
+        <h1>GAME OVER!</h1>
+        <h2>You lost the game</h2>
+        <button class="btn" onclick="window.location.reload()">Restart</button>
+      </div>
+    </div>
+    <footer>Left/right keys to move</footer>
+  </div>
+  <script src="./js/scripts.js"></script>
+</body>
+
+</html>
