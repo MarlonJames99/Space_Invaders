@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 html,
 body {
@@ -20,17 +21,29 @@ body {
 
 header {
   text-align: center;
-  background: black;
-  color: #fff;
-  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+} 
+
+header h1 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
 }
 
 footer {
-  padding: 10px;
-  text-align: center;
-  font-size: 11px;
-  background: black;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.9);
   color: white;
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  text-transform: uppercase;
+}
+
+footer p {
+  font-size: 10px;
 }
 
 .game-wrapper {
@@ -38,7 +51,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #222;
+  background: rgba(0, 0, 0, 0.9);
 }
 .game {
   width: 800px;
@@ -86,10 +99,10 @@ footer {
 .congratulations {
   display: none;
   position: absolute;
-  background: rgba(0, 171, 0, 0.5);
+  background: darkgreen;
+  box-shadow: 0px 0px 20px green;
   color: white;
   padding: 20px 50px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   text-align: center;
   animation: pop-in 1s;
@@ -98,21 +111,24 @@ footer {
 .congratulations h2 {
   text-transform: uppercase;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-top: 5px;
+  font-size: 35px;
 }
 
 .congratulations p {
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .game-over {
   display: none;
   position: absolute;
-  background: #6b1818;
+  background: darkred;
+  box-shadow: 0px 0px 20px red;
   color: white;
   padding: 20px 50px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   text-align: center;
   animation: pop-in 1s;
@@ -121,18 +137,21 @@ footer {
 .game-over h2 {
   text-transform: uppercase;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-top: 5px;
+  font-size: 35px;
 }
 
 .game-over p {
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .btn {
-  border: 2px solid #36bbf5;
+  border: none;
   border-radius: 12px;
-  box-shadow: 0 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
   background: linear-gradient(
     to bottom,
     #fff 0%,
@@ -141,11 +160,17 @@ footer {
     #eee 100%
   );
   padding: 10px 20px;
-  font: 16px;
+  margin-bottom: 10px;
+  font-size: 16px;
   font-family: 'Noto Serif', serif;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translate(0, 0.1rem);
 }
 
 @keyframes pop-in {
