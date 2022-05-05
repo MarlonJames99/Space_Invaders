@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
 html,
 body {
   height: 100%;
@@ -6,7 +8,8 @@ body {
 
 body {
   margin: 0;
-  font: 16px sans-serif;
+  font-size: 16px;
+  font-family: 'Noto Serif', serif;
 }
 
 .wrap {
@@ -83,13 +86,24 @@ footer {
 .congratulations {
   display: none;
   position: absolute;
-  background: #c7a526;
+  background: rgba(0, 171, 0, 0.5);
   color: white;
   padding: 20px 50px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
   animation: pop-in 1s;
+}
+
+.congratulations h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.congratulations p {
+  margin-top: 10px;
 }
 
 .game-over {
@@ -99,14 +113,25 @@ footer {
   color: white;
   padding: 20px 50px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
   animation: pop-in 1s;
 }
 
+.game-over h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.game-over p {
+  margin-top: 10px;
+}
+
 .btn {
   border: 2px solid #36bbf5;
-  border-radius: 3px;
+  border-radius: 12px;
   box-shadow: 0 2px rgba(0, 0, 0, 0.15);
   background: linear-gradient(
     to bottom,
@@ -115,8 +140,12 @@ footer {
     #f5f5f5 50%,
     #eee 100%
   );
-  padding: 10px 40px;
-  font: 14px sans-serif;
+  padding: 10px 20px;
+  font: 16px;
+  font-family: 'Noto Serif', serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 
 @keyframes pop-in {
