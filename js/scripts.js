@@ -63,7 +63,7 @@ function createPlayer($container) {
     gameState.playerX = gameWidth / 2;
     gameState.playerY = gameHeight - 50;
     const $player = document.createElement("img");
-    $player.src = "../img/player-blue-1.png";
+    $player.src = "./img/player-blue-1.png";
     $player.className = "player";
     $container.appendChild($player);
     setPosition($player, gameState.playerX, gameState.playerY);
