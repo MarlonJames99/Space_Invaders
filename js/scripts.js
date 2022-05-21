@@ -72,7 +72,7 @@ function createPlayer($container) {
 function destroyPlayer($container, player) {
     $container.removeChild(player);
     gameState.gameOver = true;
-    const audio = new Audio("../sound/sfx-lose.ogg");
+    const audio = new Audio("./sound/sfx-lose.ogg");
     audio.play();
 }
 
@@ -104,13 +104,13 @@ function updatePlayer(dt, $container) {
 
 function createLaser($container, x, y) {
     const $element = document.createElement("img");
-    $element.src = "../img/laser-blue-1.png";
+    $element.src = "./img/laser-blue-1.png";
     $element.className = "laser";
     $container.appendChild($element);
     const laser = { x, y, $element };
     gameState.lasers.push(laser);
     setPosition($element, x, y);
-    const audio = new Audio("../sound/sfx-laser1.ogg");
+    const audio = new Audio("./sound/sfx-laser1.ogg");
     audio.play();
 }
 
@@ -147,7 +147,7 @@ function destroyLaser($container, laser) {
 
 function createEnemy($container, x, y) {
     const $element = document.createElement("img");
-    $element.src = "../img/enemy-orange-1.png";
+    $element.src = "./img/enemy-orange-1.png";
     $element.className = "enemy";
     $container.appendChild($element);
     const enemy = {
@@ -186,7 +186,7 @@ function destroyEnemy($container, enemy) {
 
 function createEnemyLaser($container, x, y) {
     const $element = document.createElement("img");
-    $element.src = "../img/laser-red-5.png";
+    $element.src = "./img/laser-red-5.png";
     $element.className = "enemy-laser";
     $container.appendChild($element);
     const laser = { x, y, $element };
