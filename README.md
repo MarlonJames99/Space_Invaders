@@ -11,7 +11,7 @@ This is a remake of the classic game Space Invaders, originally release in 1978 
 Space Invaders is a fixed shooter in which the player controls a spaceship horizontally across the bottom of the screen and fires at aliens overhead. <br>
 The goal is to eliminate all of the aliens by shooting them. Avoiding to be destroyed first.
 
-### Game link: https://marlonjames99.github.io/Space_Invaders/
+### Game link: https://space-invaders-marlonjames.vercel.app
 
 ## Tecnologies:
 <div style="display: inline_block">
