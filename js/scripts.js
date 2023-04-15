@@ -1,20 +1,21 @@
-const keyCodeLeft = 37;
-const keyCodeRight = 39;
-const keyCodeSpace = 32;
+const KEY_CODE_LEFT = 37;
+const KEY_CODE_RIGHT = 39;
+const KEY_CODE_SPACE = 32;
+const KEY_CODE_ENTER = 13;
 
-const gameWidth = 800;
-const gameHeight = 600;
+const GAME_WIDTH = 800;
+const GAME_HEIGHT = 600;
 
-const playerWidth = 20;
-const playerMaxSpeed = 400;
-const laserMaxSpeed = 500;
-const laserCooldown = 0.5;
+const PLAYER_WIDTH = 20;
+const PLAYER_MAX_SPEED = 400;
+const LASER_MAX_SPEED = 500;
+const LASER_COOL_DOWN = 0.5;
 
-const enemiesPerRow = 10;
-const enemyHorizontalPadding = 80;
-const enemyVerticalPadding = 70;
-const enemyVerticalSpacing = 80;
-const enemyCooldown = 5.0;
+const ENEMIES_PER_ROW = 10;
+const ENEMY_HORIZONTAL_PADDING = 80;
+const ENEMY_VERTICAL_PADDING = 70;
+const ENEMY_VERTICAL_SPACING = 80;
+const ENEMY_COOL_DOWN = 5.0;
 
 const gameState = {
     lastTime: Date.now(),
@@ -60,8 +61,8 @@ function rand(min, max) {
 }
 
 function createPlayer($container) {
-    gameState.playerX = gameWidth / 2;
-    gameState.playerY = gameHeight - 50;
+    gameState.playerX = GAME_WIDTH / 2;
+    gameState.playerY = GAME_HEIGHT - 50;
     const $player = document.createElement("img");
     $player.src = "./img/player-blue-1.png";
     $player.className = "player";
@@ -78,21 +79,21 @@ function destroyPlayer($container, player) {
 
 function updatePlayer(dt, $container) {
     if (gameState.leftPressed) {
-        gameState.playerX -= dt * playerMaxSpeed;
+        gameState.playerX -= dt * PLAYER_MAX_SPEED;
     }
     if (gameState.rightPressed) {
-        gameState.playerX += dt * playerMaxSpeed;
+        gameState.playerX += dt * PLAYER_MAX_SPEED;
     }
 
     gameState.playerX = clamp(
         gameState.playerX, 
-        playerWidth, 
-        gameWidth - playerWidth
+        PLAYER_WIDTH, 
+        GAME_WIDTH - PLAYER_WIDTH
     );
 
     if (gameState.spacePressed && gameState.playerCooldown <= 0) {
         createLaser($container, gameState.playerX, gameState.playerY);
-        gameState.playerCooldown = laserCooldown;
+        gameState.playerCooldown = LASER_COOL_DOWN;
     }
     if (gameState.playerCooldown > 0) {
         gameState.playerCooldown -= dt;
@@ -118,7 +119,7 @@ function updateLasers(dt, $container) {
     const lasers = gameState.lasers;
     for (let i = 0; i < lasers.length; i++) {
         const laser = lasers[i];
-        laser.y -= dt * laserMaxSpeed;
+        laser.y -= dt * LASER_MAX_SPEED;
         if (laser.y < 0) {
             destroyLaser($container, laser);
         }
@@ -153,7 +154,7 @@ function createEnemy($container, x, y) {
     const enemy = {
         x,
         y,
-        cooldown: rand(0.5, enemyCooldown),
+        cooldown: rand(0.5, ENEMY_COOL_DOWN),
         $element
     };
     gameState.enemies.push(enemy);
@@ -173,7 +174,7 @@ function updateEnemies(dt, $container) {
         enemy.cooldown -= dt;
         if (enemy.cooldown <= 0) {
             createEnemyLaser($container, x, y);
-            enemy.cooldown = enemyCooldown;
+            enemy.cooldown = ENEMY_COOL_DOWN;
         }
     }
     gameState.enemies = gameState.enemies.filter(e => !e.isDead);
@@ -198,8 +199,8 @@ function updateEnemyLasers(dt, $container) {
     const lasers = gameState.enemyLasers;
     for (let i = 0; i < lasers.length; i++) {
         const laser = lasers[i];
-        laser.y += dt * laserMaxSpeed;
-        if (laser.y > gameHeight) {
+        laser.y += dt * LASER_MAX_SPEED;
+        if (laser.y > GAME_HEIGHT) {
             destroyLaser($container, laser);
         }
         setPosition(laser.$element, laser.x, laser.y);
@@ -219,12 +220,12 @@ function init() {
     const $container = document.querySelector(".game");
     createPlayer($container);
 
-    const enemySpacing = (gameWidth - enemyHorizontalPadding * 2) /
-        (enemiesPerRow - 1);
+    const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_PADDING * 2) /
+        (ENEMIES_PER_ROW - 1);
     for (let j = 0; j < 3; j++) {
-        const y = enemyVerticalPadding + j * enemyVerticalSpacing;
-        for (let i = 0; i < enemiesPerRow; i++) {
-            const x = i * enemySpacing + enemyHorizontalPadding;
+        const y = ENEMY_VERTICAL_PADDING + j * ENEMY_VERTICAL_SPACING;
+        for (let i = 0; i < ENEMIES_PER_ROW; i++) {
+            const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
             createEnemy($container, x, y);
         }
     }
@@ -259,11 +260,11 @@ function update(e) {
 }
 
 function onKeyDown(e) {
-    if (e.keyCode === keyCodeLeft) {
+    if (e.keyCode === KEY_CODE_LEFT) {
         gameState.leftPressed = true;
-    } else if (e.keyCode === keyCodeRight) {
+    } else if (e.keyCode === KEY_CODE_RIGHT) {
         gameState.rightPressed = true;
-    } else if (e.keyCode === keyCodeSpace) {
+    } else if (e.keyCode === KEY_CODE_SPACE) {
         gameState.spacePressed = true;
     }
 }
@@ -273,11 +274,11 @@ function isModalOverShowing() {
 }
 
 function onKeyUp(e) {
-    if (e.keyCode === keyCodeLeft) {
+    if (e.keyCode === KEY_CODE_LEFT) {
         gameState.leftPressed = false;
-    } else if (e.keyCode === keyCodeRight) {
+    } else if (e.keyCode === KEY_CODE_RIGHT) {
         gameState.rightPressed = false;
-    } else if (e.keyCode === keyCodeSpace) {
+    } else if (e.keyCode === KEY_CODE_SPACE) {
         gameState.spacePressed = false;
     } else if (e.keyCode === KEY_CODE_ENTER && isModalOverShowing()) {
         window.location.reload()
