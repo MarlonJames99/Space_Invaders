@@ -268,6 +268,10 @@ function onKeyDown(e) {
     }
 }
 
+function isModalOverShowing() {
+    return !!document.querySelector("div[style*='display: block'].game-over")
+}
+
 function onKeyUp(e) {
     if (e.keyCode === keyCodeLeft) {
         gameState.leftPressed = false;
@@ -275,6 +279,8 @@ function onKeyUp(e) {
         gameState.rightPressed = false;
     } else if (e.keyCode === keyCodeSpace) {
         gameState.spacePressed = false;
+    } else if (e.keyCode === KEY_CODE_ENTER && isModalOverShowing()) {
+        window.location.reload()
     }
 }
 
