@@ -10,6 +10,7 @@ const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 20;
 const PLAYER_MAX_SPEED = 400;
+const PLAYER_UP = 3;
 const LASER_MAX_SPEED = 500;
 const LASER_COOL_DOWN = 0.5;
 
@@ -37,6 +38,7 @@ const gameState = {
     killedEnemies: 0,
     currentScore: 0,
     highScore: localStorage.getItem('highScore') ?? 0,
+    playerUp: PLAYER_UP,
     gameOver: false
 };
 
@@ -79,9 +81,14 @@ function createPlayer($container) {
     setPosition($player, gameState.playerX, gameState.playerY);
 }
 
-function destroyPlayer($container, player) {
-    $container.removeChild(player);
-    gameState.gameOver = true;
+function destroyPlayer($container, player, laser) {
+    gameState.playerUp--;
+    if (gameState.playerUp === 0) {
+        $container.removeChild(player);
+        gameState.gameOver = true;
+    } else {
+        destroyLaser($container, laser)
+    }
     const audio = new Audio("./sound/sfx-lose.ogg");
     audio.play();
 }
@@ -122,6 +129,7 @@ function updateStats() {
     document.querySelector('.enemy-killed').innerHTML = gameState.killedEnemies
     document.querySelector('.current-score').innerHTML = gameState.currentScore
     document.querySelector('.high-score').innerHTML = gameState.highScore
+    document.querySelector('.player-up').innerHTML = gameState.playerUp
 }
 
 function createLaser($container, x, y) {
@@ -234,7 +242,8 @@ function updateEnemyLasers(dt, $container) {
         const r2 = player.getBoundingClientRect();
         if (rectsIntersect(r1, r2)) {
             // Player was hit
-            destroyPlayer($container, player);
+            destroyPlayer($container, player, laser);
+            updateStats()
             break;
         }
     }
