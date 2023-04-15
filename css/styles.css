@@ -194,8 +194,8 @@ footer p {
 .stats {
   position: fixed;
   font-family: 'Press Start 2P', cursive;
-  right: 50px;
-  top: 100px;
+  margin-top: -200px;
+  margin-left: 1200px;
   color: white;
   background: #161616;
   padding: 0 20px;
