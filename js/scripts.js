@@ -14,6 +14,9 @@ const LASER_MAX_SPEED = 500;
 const LASER_COOL_DOWN = 0.5;
 
 const ENEMIES_PER_ROW = 10;
+const ENEMIES_ROWS = 3;
+const ENEMIES_TOTAL = ENEMIES_PER_ROW * ENEMIES_ROWS;
+const ENEMY_KILL_POINT = 7.5;
 const ENEMY_HORIZONTAL_PADDING = 80;
 const ENEMY_VERTICAL_PADDING = 70;
 const ENEMY_VERTICAL_SPACING = 80;
@@ -30,6 +33,10 @@ const gameState = {
     lasers: [],
     enemies: [],
     enemyLasers: [],
+    aliveEnemies: ENEMIES_TOTAL,
+    killedEnemies: 0,
+    currentScore: 0,
+    highScore: localStorage.getItem('highScore') ?? 0,
     gameOver: false
 };
 
@@ -103,6 +110,18 @@ function updatePlayer(dt, $container) {
 
     const $player = document.querySelector('.player');
     setPosition($player, gameState.playerX, gameState.playerY);
+}
+
+function updateStats() {
+    if (localStorage.getItem('highScore') < gameState.currentScore) {
+        localStorage.setItem('highScore', gameState.currentScore)
+        gameState.highScore = gameState.currentScore
+    }
+
+    document.querySelector('.enemy-remaining').innerHTML = gameState.aliveEnemies
+    document.querySelector('.enemy-killed').innerHTML = gameState.killedEnemies
+    document.querySelector('.current-score').innerHTML = gameState.currentScore
+    document.querySelector('.high-score').innerHTML = gameState.highScore
 }
 
 function createLaser($container, x, y) {
@@ -185,6 +204,10 @@ function updateEnemies(dt, $container) {
 function destroyEnemy($container, enemy) {
     $container.removeChild(enemy.$element);
     enemy.isDead = true;
+    gameState.aliveEnemies--;
+    gameState.killedEnemies++;
+    gameState.currentScore += ENEMY_KILL_POINT;
+    updateStats()
 }
 
 function createEnemyLaser($container, x, y) {
@@ -224,13 +247,15 @@ function init() {
 
     const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_PADDING * 2) /
         (ENEMIES_PER_ROW - 1);
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < ENEMIES_ROWS; j++) {
         const y = ENEMY_VERTICAL_PADDING + j * ENEMY_VERTICAL_SPACING;
         for (let i = 0; i < ENEMIES_PER_ROW; i++) {
             const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
             createEnemy($container, x, y);
         }
     }
+
+    updateStats()
 }
 
 function playerHasWon() {
@@ -276,8 +301,8 @@ function onKeyDown(e) {
     }
 }
 
-function isModalOverShowing() {
-    return !!document.querySelector("div[style*='display: block'].game-over")
+function isModalVisible() {
+    return !!document.querySelector("div[style*='display: block'].game-over, div[style*='display: block'].congratulations");
 }
 
 function onKeyUp(e) {
@@ -287,8 +312,8 @@ function onKeyUp(e) {
         gameState.rightPressed = false;
     } else if (e.keyCode === KEY_CODE_SPACE) {
         gameState.spacePressed = false;
-    } else if (e.keyCode === KEY_CODE_ENTER && isModalOverShowing()) {
-        window.location.reload()
+    } else if (e.keyCode === KEY_CODE_ENTER && isModalVisible()) {
+        window.location.reload();
     }
 }
 
