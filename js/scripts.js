@@ -1,5 +1,7 @@
 const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
+const KEY_CODE_A = 65;
+const KEY_CODE_D = 68;
 const KEY_CODE_SPACE = 32;
 const KEY_CODE_ENTER = 13;
 
@@ -259,10 +261,15 @@ function update(e) {
     window.requestAnimationFrame(update);
 }
 
+const moviment = {
+    isLeft: (e) => [KEY_CODE_LEFT, KEY_CODE_A].includes(e.keyCode),
+    isRight: (e) => [KEY_CODE_RIGHT, KEY_CODE_D].includes(e.keyCode)
+}
+
 function onKeyDown(e) {
-    if (e.keyCode === KEY_CODE_LEFT) {
+    if (moviment.isLeft(e)) {
         gameState.leftPressed = true;
-    } else if (e.keyCode === KEY_CODE_RIGHT) {
+    } else if (moviment.isRight(e)) {
         gameState.rightPressed = true;
     } else if (e.keyCode === KEY_CODE_SPACE) {
         gameState.spacePressed = true;
@@ -274,9 +281,9 @@ function isModalOverShowing() {
 }
 
 function onKeyUp(e) {
-    if (e.keyCode === KEY_CODE_LEFT) {
+    if (moviment.isLeft(e)) {
         gameState.leftPressed = false;
-    } else if (e.keyCode === KEY_CODE_RIGHT) {
+    } else if (moviment.isRight(e)) {
         gameState.rightPressed = false;
     } else if (e.keyCode === KEY_CODE_SPACE) {
         gameState.spacePressed = false;
