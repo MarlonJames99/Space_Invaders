@@ -188,3 +188,34 @@ footer p {
     transform: translate(0, 0);
   }
 }
+
+/* STATS */
+
+.stats {
+  position: fixed;
+  font-family: 'Press Start 2P', cursive;
+  margin-top: -200px;
+  margin-left: 1200px;
+  color: white;
+  background: #161616;
+  padding: 0 20px;
+  border-radius: 2px;
+  box-shadow: 11px 14px 0px 0px #121212;
+}
+
+.stats ul {
+  list-style: none;
+}
+
+.stats ul:first-child {
+  padding: 0;
+}
+
+.stats ul li {
+  display: flex;
+  gap: 5px;
+}
+
+.stats ul p {
+  margin-top: .4em;
+}
